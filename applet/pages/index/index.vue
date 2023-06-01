@@ -1,52 +1,29 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-		</view>
+		123
 	</view>
 </template>
 
 <script>
+	const db = wx.cloud.database()
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				
 			}
 		},
 		onLoad() {
-
+			const watcher = db.collection('cuisineCategory').doc('8f4e14e96421b9bf0021a04d089031cf').watch({
+			  onChange: function(snapshot) {
+			    console.log('snapshot', snapshot)
+			  },
+			  onError: function(err) {
+			    console.error('the watch closed because of error', err)
+			  }
+			})
 		},
 		methods: {
 
 		}
 	}
 </script>
-
-<style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
-	}
-</style>
