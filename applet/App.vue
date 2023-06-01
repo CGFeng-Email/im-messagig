@@ -7,6 +7,16 @@
 				env: 'diancan-1gbnagvw311f423e',
 				traceUser: true,
 			})
+			
+			// 建立连接
+			this.goEasy.connect({
+			  onSuccess: function () { //连接成功
+			    console.log("连接成功") //连接成功
+			  },
+			  onFailed: function (error) { //连接失败
+			   console.log("连接失败:"+error.code+ ",error:"+error.content);
+			  }
+			});
 		},
 		onShow: function() {
 			console.log('App Show')

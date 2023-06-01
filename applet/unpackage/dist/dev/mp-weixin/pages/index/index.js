@@ -161,7 +161,23 @@ var _default = {
       }
     });
   },
-  methods: {}
+  methods: {
+    fasong: function fasong() {
+      var pubsub = this.goEasy.pubsub;
+      pubsub.publish({
+        channel: "my_channel",
+        //替换为您自己的channel
+        message: "前端的消息发送过来了",
+        //替换为您想要发送的消息内容
+        onSuccess: function onSuccess() {
+          console.log("消息发布成功。");
+        },
+        onFailed: function onFailed(error) {
+          console.log("消息发送失败，错误编码：" + error.code + " 错误信息：" + error.content);
+        }
+      });
+    }
+  }
 };
 exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))

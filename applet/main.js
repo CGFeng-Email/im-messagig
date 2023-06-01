@@ -1,11 +1,21 @@
-import App from './App'
+import App from './App';
+import Vue from 'vue';
+// 导入GoEasy
+import GoEasy from 'goeasy';
 
-// #ifndef VUE3
-import Vue from 'vue'
 Vue.config.productionTip = false
 App.mpType = 'app'
 
+// 建议在main.js里初始化全局的GoEasy对象
+Vue.prototype.goEasy = GoEasy.getInstance({
+  host:'hangzhou.goeasy.io', //新加坡host：singapore.goeasy.io
+  appkey: "BC-3e7431623cb844e6a48c81540e0d8cf0", //替换为您的应用appkey
+  modules: ['pubsub']
+});
 
+
+
+// #ifndef VUE3
 try {
 	function isPromise(obj) {
 		return (

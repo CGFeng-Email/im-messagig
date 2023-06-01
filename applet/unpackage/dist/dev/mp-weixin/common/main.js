@@ -16,12 +16,22 @@ var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/hel
 __webpack_require__(/*! uni-pages */ 26);
 var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 27));
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 25));
+var _goeasy = _interopRequireDefault(__webpack_require__(/*! goeasy */ 40));
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 // @ts-ignore
 wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
 _vue.default.config.productionTip = false;
 _App.default.mpType = 'app';
+
+// 建议在main.js里初始化全局的GoEasy对象
+_vue.default.prototype.goEasy = _goeasy.default.getInstance({
+  host: 'hangzhou.goeasy.io',
+  //新加坡host：singapore.goeasy.io
+  appkey: "BC-3e7431623cb844e6a48c81540e0d8cf0",
+  //替换为您的应用appkey
+  modules: ['pubsub']
+});
 try {
   var isPromise = function isPromise(obj) {
     return !!obj && ((0, _typeof2.default)(obj) === "object" || typeof obj === "function") && typeof obj.then === "function";
@@ -126,6 +136,19 @@ var _default = {
     wx.cloud.init({
       env: 'diancan-1gbnagvw311f423e',
       traceUser: true
+    });
+
+    // 建立连接
+    this.goEasy.connect({
+      onSuccess: function onSuccess() {
+        //连接成功
+        console.log("连接成功"); //连接成功
+      },
+
+      onFailed: function onFailed(error) {
+        //连接失败
+        console.log("连接失败:" + error.code + ",error:" + error.content);
+      }
     });
   },
   onShow: function onShow() {

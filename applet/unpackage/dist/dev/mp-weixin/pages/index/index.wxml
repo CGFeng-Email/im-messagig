@@ -1,1 +1,1 @@
-<view class="content">123</view>
+<view class="content"><button data-event-opts="{{[['tap',[['fasong',['$event']]]]]}}" bindtap="__e">发送消息数据</button></view>
